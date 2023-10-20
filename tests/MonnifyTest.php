@@ -132,6 +132,25 @@ class MonnifyTest extends TestCase
         $this->assertEquals('expected_value', $result['some_key']);
     }
     
+    public function testGetReservedAccountDetails()
+    {
+        $monnify = new Monnify(['api_key' => 'your_api_key', 'secret_key' => 'your_secret_key', 'test' => true]);
+
+        // Replace 'abc1niui--23' with the actual account reference
+        $accountReference = 'abc1niui--23';
+
+        $result = $monnify->getReservedAccountDetails($accountReference);
+
+        $this->assertTrue($result['success']);
+        $this->assertEquals('success', $result['responseMessage']);
+
+        // Add more assertions to validate the response data
+        $this->assertEquals('expected_value', $result['responseBody']['contractCode']);
+        $this->assertEquals('expected_value', $result['responseBody']['accountName']);
+        // Add more assertions for other response data
+    }
+
+
     public function testInitiateSingleTransfer()
     {
         $monnify = new Monnify([

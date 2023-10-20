@@ -133,6 +133,70 @@ class Monnify
         return $this->makeRequest('POST', $url, $headers, $accountData);
     }
 
+    public function getReservedAccountDetails($accountReference)
+    {
+        $url = $this->apiUrl . '/api/v2/bank-transfer/reserved-accounts/' . $accountReference;
+        $headers = [];
+        
+        return $this->makeRequest('GET', $url, $headers);
+    }
+
+    public function addLinkedAccounts($accountReference, $getAllAvailableBanks, $preferredBanks = [])
+    {
+        $url = $this->apiUrl . '/api/v1/bank-transfer/reserved-accounts/add-linked-accounts/' . $accountReference;
+        $headers = ['Content-Type' => 'application/json'];
+
+        $requestData = [
+            'getAllAvailableBanks' => $getAllAvailableBanks,
+            'preferredBanks' => $preferredBanks,
+        ];
+
+        return $this->makeRequest('PUT', $url, $headers, json_encode($requestData));
+    }
+
+    public function getReservedAccountTransactions($accountReference, $page = 0, $size = 10)
+    {
+        $url = $this->apiUrl . '/api/v1/bank-transfer/reserved-accounts/transactions';
+
+        // Set query parameters
+        $query = [
+            'accountReference' => $accountReference,
+            'page' => $page,
+            'size' => $size,
+        ];
+
+        $headers = [];
+
+        return $this->makeRequest('GET', $url, $headers, null, $query);
+    }
+
+    public function getSingleTransferStatus($reference)
+    {
+        $url = $this->apiUrl . '/api/v2/disbursements/single/summary';
+
+        // Set query parameters
+        $query = ['reference' => $reference];
+        $headers = [];
+
+        return $this->makeRequest('GET', $url, $headers, null, $query);
+    }
+
+    public function listAllSingleTransfers($pageSize, $pageNo)
+    {
+        $url = $this->apiUrl . '/api/v2/disbursements/single/transactions';
+
+        // Set query parameters
+        $query = [
+            'pageSize' => $pageSize,
+            'pageNo' => $pageNo,
+        ];
+
+        $headers = [];
+
+        return $this->makeRequest('GET', $url, $headers, null, $query);
+    }
+
+
     public function initiateSingleTransfer($transferData)
     {
         $url = $this->apiUrl . '/api/v2/disbursements/single';
