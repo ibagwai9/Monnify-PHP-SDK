@@ -13,7 +13,7 @@ $config = [
 
 $monnify = new Monnify($config);
 $transactionResponse = null;
-
+$redirectUrl = null;
 $transactionData = [
     'amount' => 100.00,
     "customerName"=>"Ishaq Ibrahim",
@@ -29,7 +29,6 @@ $transactionData = [
 try {
     $transactionResponse = $monnify->initializeTransaction($transactionData);
     $redirectUrl = $transactionResponse['responseBody']['checkoutUrl'] ?? null;
-    $sql3 = $conn->prepare("UPDATE tp_payments SET checkout_url={$redirectUrl} WHERE ref_no={$refNo}");
 
 } catch (Exception $e) {
     echo "Transaction Error: " . $e->getMessage();
