@@ -16,13 +16,13 @@ $transactionResponse = null;
 $redirectUrl = null;
 $transactionData = [
     'amount' => 100.00,
-    "customerName"=>"Ishaq Ibrahim",
-    "customerEmail"=> "ishaq@example.com",
-    "paymentReference"=> '12474284298289',
+    "customerName"=>"John Doe",
+    "customerEmail"=> "john.doe@example.com",
+    "paymentReference"=> '1247xxxyyyzzz',
     "paymentDescription"=> "Trial transaction",
     "currencyCode"=> "NGN",
     "contractCode"=>"CONTRACT_CODE",
-    "redirectUrl"=> "{'SERVER_ROOT'}/confirm-payment.php",
+    "redirectUrl"=> "YOUR_REDIRECT_URL",
     "paymentMethods"=>["CARD","ACCOUNT_TRANSFER"]
 ];
                 
